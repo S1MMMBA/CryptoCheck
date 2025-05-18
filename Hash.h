@@ -1,8 +1,9 @@
 
-#ifndef BLOCKCRYPT_H
-#define BLOCKCRYPT_H
+#ifndef HASH_H
+#define HASH_H
 
-#endif // BLOCKCRYPT_H
+#endif // HASH_H
+
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QLabel>
@@ -16,47 +17,47 @@
 #include<QButtonGroup>
 #include<QFile>
 
-class BlockCrypt : public QWidget {
+class Hash : public QWidget {
     Q_OBJECT
 public:
-    BlockCrypt(QWidget *parent = nullptr);
+    Hash(QWidget *parent = nullptr);
 private slots:
-    void chooseKeyFile();      // Выбор ключа из файла
+    //void chooseKeyFile();      // Выбор ключа из файла
     void chooseDataFile();    // Выбор данных из файла
-    void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
+    //void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
     void toggleDataInput();  // Переключение между файлами и вводом вручную данных
     void resetForm();       // Сброс формы
     void encryptData();     // Зашифровать данные
-    void decryptData();     // Расшифровать данные
+    //void decryptData();     // Расшифровать данные
 private:
     QVBoxLayout *layout;
     QLabel * label1;
     QLabel * label2;
     QLabel * label3;
     QLabel * label4;
-    QLabel * fileKeyLabel;
+    //QLabel * fileKeyLabel;
     QLabel * fileDataLabel;
     QLineEdit * OutPutLabel;
 
     QLineEdit *enterData;
-    QLineEdit *keyInput;
+    //QLineEdit *keyInput;
 
     QRadioButton *fileDataRadio;
     QRadioButton *manualDataRadio;
-    QRadioButton *fileKeyRadio;
-    QRadioButton *manualKeyRadio;
+    //QRadioButton *fileKeyRadio;
+    //QRadioButton *manualKeyRadio;
 
     QButtonGroup* dataInputGroup;
-    QButtonGroup* keyInputGroup;
+    //QButtonGroup* keyInputGroup;
 
-    QPushButton * openFileKeyButton;
+    //QPushButton * openFileKeyButton;
     QPushButton * openFileDataButton;
     QPushButton *resetButton;
     QPushButton *encryptButton;
     QPushButton *decryptButton;
 
     QString *dataString = new QString();
-    QString *keyString = new QString();
+    //QString *keyString = new QString();
     QByteArray byteDataArray;
-    QByteArray byteKeyArray;
+    //QByteArray byteKeyArray;
 };

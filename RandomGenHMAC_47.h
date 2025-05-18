@@ -1,12 +1,13 @@
 
-#ifndef BLOCKCRYPT_H
-#define BLOCKCRYPT_H
+#ifndef RANDOMGENHMAC_47_H
+#define RANDOMGENHMAC_47_H
 
-#endif // BLOCKCRYPT_H
+#endif // RANDOMGENHMAC_47_H
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QLabel>
 #include<QLineEdit>
+#include<QTextEdit>
 #include <QPushButton>
 #include<QFileDialog>
 #include<QDir>
@@ -15,48 +16,57 @@
 #include<QRegularExpression>
 #include<QButtonGroup>
 #include<QFile>
-
-class BlockCrypt : public QWidget {
+#include<QSpinBox>
+#include<QComboBox>
+#include "bee2/crypto/brng.h"
+class RandomGenHMAC_47 : public QWidget {
     Q_OBJECT
 public:
-    BlockCrypt(QWidget *parent = nullptr);
+    RandomGenHMAC_47(QWidget *parent = nullptr);
 private slots:
     void chooseKeyFile();      // Выбор ключа из файла
     void chooseDataFile();    // Выбор данных из файла
     void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
     void toggleDataInput();  // Переключение между файлами и вводом вручную данных
     void resetForm();       // Сброс формы
-    void encryptData();     // Зашифровать данные
-    void decryptData();     // Расшифровать данные
+    void produceMAC();     // Выработать имитовставку
 private:
     QVBoxLayout *layout;
     QLabel * label1;
     QLabel * label2;
     QLabel * label3;
     QLabel * label4;
-    QLabel * fileKeyLabel;
-    QLabel * fileDataLabel;
-    QLineEdit * OutPutLabel;
+    QTextEdit * fileKeyLabel;
+    QTextEdit * fileDataLabel;
+    QTextEdit * OutPutLabel;
 
-    QLineEdit *enterData;
-    QLineEdit *keyInput;
+    QTextEdit *enterData;
+    QTextEdit *keyInput;
+
+
+    QLabel * label6;
+    QComboBox* numberCombo;
 
     QRadioButton *fileDataRadio;
     QRadioButton *manualDataRadio;
     QRadioButton *fileKeyRadio;
     QRadioButton *manualKeyRadio;
+    QRadioButton *dataStrRadio;
+    QRadioButton *dataHexRadio;
 
     QButtonGroup* dataInputGroup;
     QButtonGroup* keyInputGroup;
+    QButtonGroup* dataTypeGroup;
 
     QPushButton * openFileKeyButton;
     QPushButton * openFileDataButton;
     QPushButton *resetButton;
     QPushButton *encryptButton;
-    QPushButton *decryptButton;
 
+    size_t n;
     QString *dataString = new QString();
     QString *keyString = new QString();
+    QString filePath;
     QByteArray byteDataArray;
     QByteArray byteKeyArray;
 };

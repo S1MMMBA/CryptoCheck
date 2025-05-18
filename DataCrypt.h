@@ -1,12 +1,14 @@
 
-#ifndef BLOCKCRYPT_H
-#define BLOCKCRYPT_H
+#ifndef DATACRYPT_H
+#define DATACRYPT_H
 
-#endif // BLOCKCRYPT_H
+#endif // DATACRYPT_H
+
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QLabel>
 #include<QLineEdit>
+#include<QTextEdit>
 #include <QPushButton>
 #include<QFileDialog>
 #include<QDir>
@@ -15,11 +17,12 @@
 #include<QRegularExpression>
 #include<QButtonGroup>
 #include<QFile>
-
-class BlockCrypt : public QWidget {
+#include<QSpinBox>
+#include "bee2/crypto/belt.h"
+class DataCrypt : public QWidget {
     Q_OBJECT
 public:
-    BlockCrypt(QWidget *parent = nullptr);
+    DataCrypt(QWidget *parent = nullptr);
 private slots:
     void chooseKeyFile();      // Выбор ключа из файла
     void chooseDataFile();    // Выбор данных из файла
@@ -34,20 +37,23 @@ private:
     QLabel * label2;
     QLabel * label3;
     QLabel * label4;
-    QLabel * fileKeyLabel;
-    QLabel * fileDataLabel;
-    QLineEdit * OutPutLabel;
+    QTextEdit * fileKeyLabel;
+    QTextEdit * fileDataLabel;
+    QTextEdit * OutPutLabel;
 
-    QLineEdit *enterData;
-    QLineEdit *keyInput;
+    QTextEdit *enterData;
+    QTextEdit *keyInput;
 
     QRadioButton *fileDataRadio;
     QRadioButton *manualDataRadio;
     QRadioButton *fileKeyRadio;
     QRadioButton *manualKeyRadio;
+    QRadioButton *dataStrRadio;
+    QRadioButton *dataHexRadio;
 
     QButtonGroup* dataInputGroup;
     QButtonGroup* keyInputGroup;
+    QButtonGroup* dataTypeGroup;
 
     QPushButton * openFileKeyButton;
     QPushButton * openFileDataButton;
@@ -55,8 +61,12 @@ private:
     QPushButton *encryptButton;
     QPushButton *decryptButton;
 
+
     QString *dataString = new QString();
     QString *keyString = new QString();
+
     QByteArray byteDataArray;
     QByteArray byteKeyArray;
+
+    QString filePath;
 };

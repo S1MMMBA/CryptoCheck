@@ -1,12 +1,14 @@
 
-#ifndef BLOCKCRYPT_H
-#define BLOCKCRYPT_H
+#ifndef EXPANDKEY_H
+#define EXPANDKEY_H
 
-#endif // BLOCKCRYPT_H
+#endif // EXPANDKEY_H
+
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QLabel>
 #include<QLineEdit>
+#include<QTextEdit>
 #include <QPushButton>
 #include<QFileDialog>
 #include<QDir>
@@ -15,48 +17,51 @@
 #include<QRegularExpression>
 #include<QButtonGroup>
 #include<QFile>
-
-class BlockCrypt : public QWidget {
+#include<QSpinBox>
+#include<QComboBox>
+#include "bee2/crypto/belt.h"
+class ExpandKey : public QWidget {
     Q_OBJECT
 public:
-    BlockCrypt(QWidget *parent = nullptr);
+    ExpandKey(QWidget *parent = nullptr);
 private slots:
     void chooseKeyFile();      // Выбор ключа из файла
-    void chooseDataFile();    // Выбор данных из файла
     void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
-    void toggleDataInput();  // Переключение между файлами и вводом вручную данных
     void resetForm();       // Сброс формы
-    void encryptData();     // Зашифровать данные
-    void decryptData();     // Расшифровать данные
+    void expandKey();     // Выработать имитовставку
 private:
     QVBoxLayout *layout;
     QLabel * label1;
     QLabel * label2;
     QLabel * label3;
     QLabel * label4;
-    QLabel * fileKeyLabel;
-    QLabel * fileDataLabel;
-    QLineEdit * OutPutLabel;
+    QLabel * label6;
+    QComboBox* numberCombo;
+    QTextEdit * fileKeyLabel;
+    QTextEdit * OutPutLabel;
 
-    QLineEdit *enterData;
-    QLineEdit *keyInput;
+   // QTextEdit *enterData;
+    QTextEdit *keyInput;
 
-    QRadioButton *fileDataRadio;
-    QRadioButton *manualDataRadio;
+
+
     QRadioButton *fileKeyRadio;
     QRadioButton *manualKeyRadio;
 
-    QButtonGroup* dataInputGroup;
+
+
     QButtonGroup* keyInputGroup;
 
+
     QPushButton * openFileKeyButton;
-    QPushButton * openFileDataButton;
+
     QPushButton *resetButton;
     QPushButton *encryptButton;
-    QPushButton *decryptButton;
 
-    QString *dataString = new QString();
+
+    size_t  n;
     QString *keyString = new QString();
-    QByteArray byteDataArray;
+    QString filePath;
+
     QByteArray byteKeyArray;
 };

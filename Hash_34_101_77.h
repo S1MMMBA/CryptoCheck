@@ -1,8 +1,8 @@
 
-#ifndef BLOCKCRYPT_H
-#define BLOCKCRYPT_H
+#ifndef HASH_34_101_77_H
+#define HASH_34_101_77_H
 
-#endif // BLOCKCRYPT_H
+#endif // HASH_34_101_77_H
 #include<QWidget>
 #include<QVBoxLayout>
 #include<QLabel>
@@ -15,48 +15,43 @@
 #include<QRegularExpression>
 #include<QButtonGroup>
 #include<QFile>
-
-class BlockCrypt : public QWidget {
+#include<QComboBox>
+#include "bee2/crypto/bash.h"
+class Hash_34_101_77 : public QWidget {
     Q_OBJECT
 public:
-    BlockCrypt(QWidget *parent = nullptr);
+    Hash_34_101_77(QWidget *parent = nullptr);
 private slots:
-    void chooseKeyFile();      // Выбор ключа из файла
     void chooseDataFile();    // Выбор данных из файла
-    void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
     void toggleDataInput();  // Переключение между файлами и вводом вручную данных
     void resetForm();       // Сброс формы
     void encryptData();     // Зашифровать данные
-    void decryptData();     // Расшифровать данные
 private:
     QVBoxLayout *layout;
     QLabel * label1;
     QLabel * label2;
     QLabel * label3;
     QLabel * label4;
-    QLabel * fileKeyLabel;
     QLabel * fileDataLabel;
     QLineEdit * OutPutLabel;
 
+    QLabel * label6;
+    QComboBox* numberCombo;
+
     QLineEdit *enterData;
-    QLineEdit *keyInput;
 
     QRadioButton *fileDataRadio;
     QRadioButton *manualDataRadio;
-    QRadioButton *fileKeyRadio;
-    QRadioButton *manualKeyRadio;
 
     QButtonGroup* dataInputGroup;
-    QButtonGroup* keyInputGroup;
 
-    QPushButton * openFileKeyButton;
     QPushButton * openFileDataButton;
     QPushButton *resetButton;
     QPushButton *encryptButton;
     QPushButton *decryptButton;
 
+    size_t l;
     QString *dataString = new QString();
-    QString *keyString = new QString();
+    QString filePath;
     QByteArray byteDataArray;
-    QByteArray byteKeyArray;
 };

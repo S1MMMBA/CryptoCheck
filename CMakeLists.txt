@@ -19,6 +19,52 @@ set(PROJECT_SOURCES
         mainwindow.h
         BlockCrypt.h
         BlockCrypt.cpp
+        CommonFunc.h
+        CommonFunc.cpp
+        DataCrypt.h
+        DataCrypt.cpp
+        DataCryptCBC.h
+        DataCryptCBC.cpp
+        DataCryptCFB.h
+        DataCryptCFB.cpp
+        DataCryptCTR.h
+        DataCryptCTR.cpp
+        ProduceMAC.h
+        ProduceMAC.cpp
+        InstallMAC.h
+        InstallMAC.cpp
+        InstallKeyMAC.h
+        InstallKeyMAC.cpp
+        Hash.h
+        Hash.cpp
+        DiskCrypt.h
+        DiskCrypt.cpp
+        DiskCrypt2.h
+        DiskCrypt2.cpp
+        SaveFormatCrypt.h
+        SaveFormatCrypt.cpp
+        ExpandKey.h
+        ExpandKey.cpp
+        ModifyKey.h
+        ModifyKey.cpp
+        Hash_34_101_77.h
+        Hash_34_101_77.cpp
+        HashProg_34_101_77.h
+        HashProg_34_101_77.cpp
+        AuthCrypt_34_101_77.h
+        AuthCrypt_34_101_77.cpp
+        ProduceMAC_HMAC_47.h
+        ProduceMAC_HMAC_47.cpp
+        RandomGenCTR_47.h
+        RandomGenCTR_47.cpp
+        RandomGenHMAC_47.h
+        RandomGenHMAC_47.cpp
+        GenPassHOTP.h
+        GenPassHOTP.cpp
+        GenPassTOTP.h
+        GenPassTOTP.cpp
+        GenPassOCRA.h
+        GenPassOCRA.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

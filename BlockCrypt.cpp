@@ -1,5 +1,5 @@
 #include"BlockCrypt.h"
-
+#include"CommonFunc.h"
 
 BlockCrypt::BlockCrypt(QWidget *parent) : QWidget(parent)
 {
@@ -21,6 +21,8 @@ BlockCrypt::BlockCrypt(QWidget *parent) : QWidget(parent)
     enterData->setPlaceholderText("Введите данные");
     enterData->setVisible(false);
     enterData->setGeometry(10, 45, 600, 30);
+
+
 
     dataInputGroup = new QButtonGroup(this);
     fileDataRadio = new QRadioButton("Из файла", this);
@@ -109,24 +111,27 @@ void BlockCrypt::chooseDataFile()
         }
 
 
-        QByteArray fileContent = file.readAll();
+        byteDataArray = file.readAll();// если читаем из bin файла, дальше работаем с сырым массивом byteDataArray, доп. проверок/преобразований не требуется.
         file.close();
 
 
         if (filePath.endsWith(".txt", Qt::CaseInsensitive))
         {
-            *dataString = QString::fromUtf8(fileContent);
-        }
-        if (filePath.endsWith(".bin", Qt::CaseInsensitive))
-        {
-            *dataString = QString(fileContent);
+            QString buf = QString::fromUtf8(byteDataArray);
+            if(buf.isEmpty())
+            {
+                QMessageBox::warning(this, "Ошибка", "Введите данные для шифрования.");
+                return;
+            }
+            buf = buf.simplified().remove(' ');
+            *dataString = buf;
         }
 
         QMessageBox::information(this, "Файл загружен", "Данные из файла успешно загружены.");
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные для шифрования.");
         return;
     }
 
@@ -151,24 +156,26 @@ void BlockCrypt::chooseKeyFile()
         }
 
 
-        QByteArray fileContent = file.readAll();
+        byteKeyArray = file.readAll(); // если читаем из bin файла, дальше работаем с сырым массивом byteKeyArray, доп. проверок/преобразований не требуется.
         file.close();
-
 
         if (filePath.endsWith(".txt", Qt::CaseInsensitive))
         {
-            *keyString = QString::fromUtf8(fileContent);
-        }
-        if (filePath.endsWith(".bin", Qt::CaseInsensitive))
-        {
-            *keyString = QString(fileContent);
+            QString buf = QString::fromUtf8(byteKeyArray);
+            if(buf.isEmpty())
+            {
+                QMessageBox::warning(this, "Ошибка", "Введите ключ для шифрования.");
+                return;
+            }
+            buf = buf.simplified().remove(' ');
+            *keyString = buf;
         }
 
         QMessageBox::information(this, "Файл загружен", "Данные из файла успешно загружены.");
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите ключ для шифрования.");
         return;
     }
 }
@@ -195,86 +202,25 @@ void BlockCrypt::resetForm()
     keyInput->clear();
     fileKeyLabel->clear();
     fileDataLabel->clear();
+    OutPutLabel->clear();
     fileKeyRadio->setChecked(false);
     manualKeyRadio->setChecked(true);
     fileDataRadio->setChecked(false);
     manualDataRadio->setChecked(true);
+    if(!dataString->isEmpty())
     *dataString = "";
+    if(!keyString->isEmpty())
     *keyString = "";
+    byteKeyArray.clear();
+    byteDataArray.clear();
     toggleKeyInput();
     toggleDataInput();
 }
 
-bool BlockCrypt::hexStringToByteArray(const QString& hexString, uint8_t* array, size_t arraySize)
-{
-    if (hexString.size() != arraySize * 2)
-    {
-        return false;
-    }
-    for (size_t i = 0; i < arraySize; ++i)
-    {
-        QString byteStr = hexString.mid(i * 2, 2);
-        bool ok = false; // доп проверка на возможность преобразования
-        array[i] = static_cast<uint8_t>(byteStr.toUInt(&ok, 16));
-        if (!ok)
-        {
-            return false;
-        }
-    }
-    return true;
-}
 
-
-void BlockCrypt::printByteArray(const uint8_t* data, size_t size)
-{
-    QStringList byteStrings;
-    for (size_t i = 0; i < size; ++i)
-    {
-        byteStrings.append(QString("%1").arg(data[i], 2, 16, QChar('0')).toUpper());
-    }
-    const QString output = byteStrings.join("");
-    OutPutLabel->setText(output);
-}
 
 void BlockCrypt::encryptData()
 {
-    QString data;
-    QString keyStr;
-
-    if(manualDataRadio->isChecked())
-        data = enterData->text();
-    if(fileDataRadio->isChecked())
-    {
-        if(dataString->isEmpty())
-        {
-            QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-            return;
-        }
-        data = *dataString;
-    }
-    if(manualKeyRadio->isChecked())
-        keyStr = keyInput->text();
-    if(fileKeyRadio->isChecked())
-    {
-        if(keyString->isEmpty())
-        {
-            QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-            return;
-        }
-        keyStr = *keyString;
-    }
-
-
-    data = data.simplified().remove(' ');
-    keyStr = keyStr.simplified().remove(' ');
-
-    // Проверка на пустоту полей
-    if (manualKeyRadio->isChecked() && (data.isEmpty() || keyStr.isEmpty()))
-    {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-        return;
-    }
-
     // Проверка на 16-ричный формат
     auto isHexFormat = [](const QString& input) -> bool
     {
@@ -282,92 +228,227 @@ void BlockCrypt::encryptData()
         QRegularExpressionMatch match = hexRegex.match(input);
         return match.hasMatch();
     };
-    if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
-    if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Ключ не является корректным 16-ричным числом.");return;}
 
+    QString data;
+    QString keyStr;
     uint8_t block[16] = {};
     uint8_t key[32] = {};
 
-    if (!hexStringToByteArray(data, block, 16))
+    if(manualDataRadio->isChecked())
     {
-        QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
-        return;
+        data = enterData->text();
+        data = data.simplified().remove(' ');
+        if(!data.isEmpty())
+            {
+                if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+                if (!hexStringToByteArray(data, block, 16))
+                {
+                    QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                    return;
+                }
+            }
+        else
+            {
+                    QMessageBox::warning(this, "Ошибка", "Введите данные для шифрования.");
+                    return;
+            }
     }
-    if(!hexStringToByteArray(keyStr,key,32))
+    if(manualKeyRadio->isChecked())
     {
-        QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байта в 16-ричном формате).");
-        return;
+        keyStr = keyInput->text();
+        keyStr = keyStr.simplified().remove(' ');
+        if(!keyStr.isEmpty())
+            {
+                    if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+                    if (!hexStringToByteArray(keyStr, key, 32))
+                    {
+                        QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                        return;
+                    }
+            }
+        else
+            {
+                    QMessageBox::warning(this, "Ошибка", "Введите ключ для шифрования.");
+                    return;
+            }
+    }
+
+
+    if(fileDataRadio->isChecked())
+    {
+        if(!dataString->isEmpty()) // переменная dataString заполнена, только если исп. ввод из txt файла, если пустая, значит ввод произошел из bin файла
+        {                          // проверки на пустоту dataString в других случаях провели на этапе считывания
+            data = *dataString;
+             if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(data, block, 16))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else // для bin файлов
+        {
+             if(byteDataArray.size() != 16)
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                 return;
+             }
+             else
+             {
+                std::memcpy(block, byteDataArray.constData(), byteDataArray.size());
+             }
+
+        }
+    }
+
+    if(fileKeyRadio->isChecked())
+    {
+        if(!keyString->isEmpty()) // переменная dataString заполнена, только если исп. ввод из txt файла, если пустая, значит ввод произошел из bin файла
+        {                          // проверки на пустоту dataString в других случаях провели на этапе считывания
+                keyStr = *keyString;
+             if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(keyStr, key, 32))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else // для bin файлов
+        {
+             if(byteKeyArray.size() != 32)
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                 return;
+             }
+             std::memcpy(key, byteKeyArray.constData(), byteKeyArray.size());
+        }
+
     }
 
     beltBlockEncr(block,(uint32_t *)key);
-    printByteArray(block,sizeof(block));
-
+    const QString output = printByteArray(block,sizeof(block));
+    OutPutLabel->setText(output);
 
     QMessageBox::information(this, "Шифрование", "Данные успешно зашифрованы!");
 }
 
 void BlockCrypt::decryptData()
 {
-    QString data;
-    QString keyStr;
-
-    if(manualDataRadio->isChecked())
-        data = enterData->text();
-    if(fileDataRadio->isChecked())
-    {
-        if(dataString->isEmpty())
-        {
-            QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-            return;
-        }
-        data = *dataString;
-    }
-
-    if(manualKeyRadio->isChecked())
-        keyStr = keyInput->text();
-    if(fileKeyRadio->isChecked())
-    {
-        if(keyString->isEmpty())
-        {
-            QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-            return;
-        }
-        keyStr = *keyString;
-    }
-
-    data = data.simplified().remove(' ');
-    keyStr = keyStr.simplified().remove(' ');
-
-    if (manualKeyRadio->isChecked() && (data.isEmpty() || keyStr.isEmpty()))
-    {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для расшифровки.");
-        return;
-    }
-
+    // Проверка на 16-ричный формат
     auto isHexFormat = [](const QString& input) -> bool
     {
         QRegularExpression hexRegex("^[0-9a-fA-F]+$");
         QRegularExpressionMatch match = hexRegex.match(input);
         return match.hasMatch();
     };
-    if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
-    if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Ключ не является корректным 16-ричным числом.");return;}
 
+    QString data;
+    QString keyStr;
     uint8_t block[16] = {};
     uint8_t key[32] = {};
 
-    if (!hexStringToByteArray(data, block, 16))
+    if(manualDataRadio->isChecked())
     {
-        QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
-        return;
+        data = enterData->text();
+        data = data.simplified().remove(' ');
+        if(!data.isEmpty())
+        {
+             if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(data, block, 16))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else
+        {
+             QMessageBox::warning(this, "Ошибка", "Введите данные для шифрования.");
+             return;
+        }
     }
-    if(!hexStringToByteArray(keyStr,key,32))
+    if(manualKeyRadio->isChecked())
     {
-        QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байта в 16-ричном формате).");
-        return;
+        keyStr = keyInput->text();
+        keyStr = keyStr.simplified().remove(' ');
+        if(!keyStr.isEmpty())
+        {
+             if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(keyStr, key, 32))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else
+        {
+             QMessageBox::warning(this, "Ошибка", "Введите ключ для шифрования.");
+             return;
+        }
+    }
+
+
+    if(fileDataRadio->isChecked())
+    {
+        if(!dataString->isEmpty()) // переменная dataString заполнена, только если исп. ввод из txt файла, если пустая, значит ввод произошел из bin файла
+        {                          // проверки на пустоту dataString в других случаях провели на этапе считывания
+             data = *dataString;
+             if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(data, block, 16))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else // для bin файлов
+        {
+             if(byteDataArray.size() != 16)
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 32 символа (16 байт в 16-ричном формате).");
+                 return;
+             }
+             else
+             {
+                 std::memcpy(block, byteDataArray.constData(), byteDataArray.size());
+             }
+
+        }
+    }
+
+    if(fileKeyRadio->isChecked())
+    {
+        if(!keyString->isEmpty()) // переменная dataString заполнена, только если исп. ввод из txt файла, если пустая, значит ввод произошел из bin файла
+        {                          // проверки на пустоту dataString в других случаях провели на этапе считывания
+             keyStr = *keyString;
+             if (!isHexFormat(keyStr)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
+
+             if (!hexStringToByteArray(keyStr, key, 32))
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                 return;
+             }
+        }
+        else // для bin файлов
+        {
+             if(byteKeyArray.size() != 32)
+             {
+                 QMessageBox::warning(this, "Ошибка", "Данные должны содержать ровно 64 символа (32 байт в 16-ричном формате).");
+                 return;
+             }
+             std::memcpy(key, byteKeyArray.constData(), byteKeyArray.size());
+        }
+
     }
     beltBlockDecr(block,(uint32_t *)key);
-    printByteArray(block,sizeof(block));
+    const QString output = printByteArray(block,sizeof(block));
+    OutPutLabel->setText(output);
 
     QMessageBox::information(this, "Расшифровка", "Данные успешно расшифрованы!");
 }
+
