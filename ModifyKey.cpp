@@ -5,13 +5,13 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
 
-    label1 = new QLabel("Введите ключ",this);
+    label1 = new QLabel("Введите ключ (K)",this);
     label1->setGeometry(10, 10, 300, 30);
 
 
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -20,7 +20,7 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     openFileDataButton->setGeometry(620,45,90,30);
 
     enterData = new QTextEdit(this);
-    enterData->setPlaceholderText("Введите данные"); // Подсказка внутри текстового поля
+    enterData->setPlaceholderText("Преобразуемый ключ (X)"); // Подсказка внутри текстового поля
     enterData->setGeometry(10, 45, 600, 80);        // Увеличьте высоту для многострочного ввода
     enterData->setWordWrapMode(QTextOption::WrapAnywhere); // Автоматический перенос строк
     enterData->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);// Включите скроллбар enterData = new QTextEdit(this);
@@ -54,8 +54,8 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите уровень",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите уровень (D)",this);
+    label2->setGeometry(10, 130, 130, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -66,7 +66,7 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -82,7 +82,7 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     keyInput->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
     //----------------------------------------------------------------------------------
-    label5 = new QLabel("Введите заголовок",this);
+    label5 = new QLabel("Введите заголовок (I)",this);
     label5->setGeometry(10, 265, 140, 30);
 
     packageInputGroup = new QButtonGroup(this);
@@ -94,7 +94,7 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     packageInputGroup->addButton(manualPackageRadio);
 
     filePackageLabel = new QTextEdit(this);
-    filePackageLabel->setStyleSheet("background-color: white;");
+    //filePackageLabel->setStyleSheet("background-color: white;");
     filePackageLabel->setVisible(false);
     filePackageLabel->setGeometry(10,305,600,80);
 
@@ -125,10 +125,10 @@ ModifyKey::ModifyKey(QWidget *parent) : QWidget(parent)
     //decryptButton = new QPushButton("Расшифровать", this);
     //decryptButton->setGeometry(510,420,100,30);
 
-    label4 = new QLabel("Вывод преобразованого ключа",this);
+    label4 = new QLabel("Вывод преобразованого ключа (Y)",this);
     label4->setGeometry(10, 450, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 500, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

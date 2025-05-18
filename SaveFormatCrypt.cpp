@@ -4,13 +4,13 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
 
-    label1 = new QLabel("Введите данные",this);
+    label1 = new QLabel("Введите данные (X)",this);
     label1->setGeometry(10, 10, 300, 30);
 
 
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -27,12 +27,9 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
 
     label6 = new QLabel("Укажите размер алфавита",this);
     label6->setGeometry(180,10,155,30);
-    numberCombo = new QComboBox(this);
-
-    for (int i = 2; i <= 65536; ++i)
-    {
-        numberCombo->addItem(QString::number(i));
-    }
+    numberCombo = new QSpinBox(this);
+    numberCombo->setMinimum(2);     // Минимальное значение
+    numberCombo->setMaximum(65536);  // Максимальное значение
     numberCombo->setGeometry(330,10,70,30);
 
 
@@ -53,8 +50,8 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
     dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 130, 110, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -65,7 +62,7 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -81,8 +78,8 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
     keyInput->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
     //----------------------------------------------------------------------------------
-    label5 = new QLabel("Введите синхропосылку",this);
-    label5->setGeometry(10, 265, 140, 30);
+    label5 = new QLabel("Введите синхропосылку (S)",this);
+    label5->setGeometry(10, 265, 170, 30);
 
     packageInputGroup = new QButtonGroup(this);
     filePackageRadio = new QRadioButton("Из файла", this);
@@ -93,7 +90,7 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
     packageInputGroup->addButton(manualPackageRadio);
 
     filePackageLabel = new QTextEdit(this);
-    filePackageLabel->setStyleSheet("background-color: white;");
+    //filePackageLabel->setStyleSheet("background-color: white;");
     filePackageLabel->setVisible(false);
     filePackageLabel->setGeometry(10,305,600,80);
 
@@ -124,10 +121,10 @@ SaveFormatCrypt::SaveFormatCrypt(QWidget *parent) : QWidget(parent)
     decryptButton = new QPushButton("Расшифровать", this);
     decryptButton->setGeometry(510,420,100,30);
 
-    label4 = new QLabel("Вывод зашифрованного блока",this);
+    label4 = new QLabel("Вывод блока (Y)",this);
     label4->setGeometry(10, 450, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 500, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -332,7 +329,8 @@ void SaveFormatCrypt::encryptData()
         QRegularExpressionMatch match = hexRegex.match(input);
         return match.hasMatch();
     };
-    alphabetSize = static_cast<size_t>(numberCombo->currentText().toULongLong());
+    //alphabetSize = static_cast<size_t>(numberCombo->currentText().toULongLong());
+    alphabetSize = numberCombo->value();
     if(manualDataRadio->isChecked())
     {
         data = enterData->toPlainText();
@@ -453,7 +451,8 @@ void SaveFormatCrypt::decryptData()
         QRegularExpressionMatch match = hexRegex.match(input);
         return match.hasMatch();
     };
-    alphabetSize = static_cast<size_t>(numberCombo->currentText().toULongLong());
+    //alphabetSize = static_cast<size_t>(numberCombo->currentText().toULongLong());
+    alphabetSize = numberCombo->value();
     if(manualDataRadio->isChecked())
     {
         data = enterData->toPlainText();

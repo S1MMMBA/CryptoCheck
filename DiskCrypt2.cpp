@@ -12,11 +12,11 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
     chooseOperation->addButton(setProtectionRadio);
     chooseOperation->addButton(removeProtectionRadio);
 
-    label1 = new QLabel("Введите сообщение >= 16 байт",this);
+    label1 = new QLabel("Введите сообщение (X) >= 16 байт",this);
     label1->setGeometry(10, 60, 300, 30);
 
     fileCriticalDataLabel = new QTextEdit(this);
-    fileCriticalDataLabel->setStyleSheet("background-color: white;");
+    //fileCriticalDataLabel->setStyleSheet("background-color: white;");
     fileCriticalDataLabel->setVisible(false);
     fileCriticalDataLabel->setGeometry(10,95,600,80);
 
@@ -50,7 +50,7 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
 
 //---------------------------------------------------------------------------------------------
 
-    label2 = new QLabel("Введите ключ",this);
+    label2 = new QLabel("Введите ключ (K)",this);
     label2->setGeometry(10, 305, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
@@ -62,7 +62,7 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,340,600,80);
 
@@ -77,8 +77,8 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
     keyInput->setWordWrapMode(QTextOption::WrapAnywhere);
     keyInput->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    label5 = new QLabel("Введите синхропосылку",this);
-    label5->setGeometry(10, 185, 140, 30);
+    label5 = new QLabel("Введите синхропосылку (S)",this);
+    label5->setGeometry(10, 185, 170, 30);
 
     titleInputGroup = new QButtonGroup(this);
     fileTitleRadio = new QRadioButton("Из файла", this);
@@ -89,7 +89,7 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
     titleInputGroup->addButton(manualTitleRadio);
 
     fileTitleLabel = new QTextEdit(this);
-    fileTitleLabel->setStyleSheet("background-color: white;");
+    //fileTitleLabel->setStyleSheet("background-color: white;");
     fileTitleLabel->setVisible(false);
     fileTitleLabel->setGeometry(10,220,600,80);
 
@@ -122,10 +122,10 @@ DiskCrypt2::DiskCrypt2(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Выполнить", this);
     encryptButton->setGeometry(510,450,100,30);
 
-    label4 = new QLabel("Вывод зашифрованного блока",this);
+    label4 = new QLabel("Вывод блока (Y)",this);
     label4->setGeometry(10, 480, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 520, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

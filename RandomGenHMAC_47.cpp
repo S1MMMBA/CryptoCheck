@@ -15,11 +15,11 @@ RandomGenHMAC_47::RandomGenHMAC_47(QWidget *parent) : QWidget(parent)
                         }
 
 
-    label1 = new QLabel("Введите сообщение для выработки имитовставки",this);
+    label1 = new QLabel("Введите синхропосылку (S)",this);
     label1->setGeometry(10, -5, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -28,7 +28,7 @@ RandomGenHMAC_47::RandomGenHMAC_47(QWidget *parent) : QWidget(parent)
     openFileDataButton->setGeometry(620,45,90,30);
 
     enterData = new QTextEdit(this);
-    enterData->setPlaceholderText("Введите сообщение для выработки имитовставки");
+    enterData->setPlaceholderText("Введите синхропосылку");
     enterData->setGeometry(10, 45, 600, 80);
     enterData->setWordWrapMode(QTextOption::WrapAnywhere);
     enterData->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -51,8 +51,8 @@ RandomGenHMAC_47::RandomGenHMAC_47(QWidget *parent) : QWidget(parent)
     dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 130, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -63,7 +63,7 @@ RandomGenHMAC_47::RandomGenHMAC_47(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -89,10 +89,10 @@ RandomGenHMAC_47::RandomGenHMAC_47(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Найти", this);
     encryptButton->setGeometry(500,260,100,30);
 
-    label4 = new QLabel("Вывод имитовставки",this);
+    label4 = new QLabel("Псевдослучайные числа: ",this);
     label4->setGeometry(10, 350, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 400, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -140,7 +140,7 @@ void RandomGenHMAC_47::chooseDataFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные .");
         return;
     }
 
@@ -178,7 +178,7 @@ void RandomGenHMAC_47::chooseKeyFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 }

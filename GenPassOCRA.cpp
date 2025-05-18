@@ -45,7 +45,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     label1->setGeometry(10, -5, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -101,7 +101,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -128,7 +128,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     qInputGroup->addButton(manualQRadio);
 
     fileQLabel = new QTextEdit(this);
-    fileQLabel->setStyleSheet("background-color: white;");
+    //fileQLabel->setStyleSheet("background-color: white;");
     fileQLabel->setVisible(false);
     fileQLabel->setGeometry(10,285,600,80);
 
@@ -158,7 +158,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     pInputGroup->addButton(manualPRadio);
 
     filePLabel = new QTextEdit(this);
-    filePLabel->setStyleSheet("background-color: white;");
+    //filePLabel->setStyleSheet("background-color: white;");
     filePLabel->setVisible(false);
     filePLabel->setGeometry(10,405,600,80);
 
@@ -189,7 +189,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     cInputGroup->addButton(manualCRadio);
 
     fileCLabel = new QTextEdit(this);
-    fileCLabel->setStyleSheet("background-color: white;");
+    //fileCLabel->setStyleSheet("background-color: white;");
     fileCLabel->setVisible(false);
     fileCLabel->setGeometry(10,525,600,80);
 
@@ -220,7 +220,7 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
     sInputGroup->addButton(manualSRadio);
 
     fileSLabel = new QTextEdit(this);
-    fileSLabel->setStyleSheet("background-color: white;");
+    //fileSLabel->setStyleSheet("background-color: white;");
     fileSLabel->setVisible(false);
     fileSLabel->setGeometry(10,645,600,80);
 
@@ -246,15 +246,15 @@ GenPassOCRA::GenPassOCRA(QWidget *parent) : QWidget(parent)
 
 
     resetButton = new QPushButton("Сбросить", this);
-    resetButton->setGeometry(620,845,100,30);
+    resetButton->setGeometry(620,825,100,30);
     encryptButton = new QPushButton("Найти", this);
-    encryptButton->setGeometry(620,810,100,30);
+    encryptButton->setGeometry(620,790,100,30);
 
     label4 = new QLabel("Одноразовый пароль",this);
-    label4->setGeometry(10, 780, 300, 30);
+    label4->setGeometry(10, 775, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
-    OutPutLabel->setGeometry(10, 810, 600, 80);
+    //OutPutLabel->setStyleSheet("background-color: white;");
+    OutPutLabel->setGeometry(10, 780, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 

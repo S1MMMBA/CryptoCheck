@@ -10,7 +10,7 @@ DataCryptCBC::DataCryptCBC(QWidget *parent) : QWidget(parent)
     label1->setGeometry(10, 10, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -54,7 +54,7 @@ DataCryptCBC::DataCryptCBC(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -82,7 +82,7 @@ DataCryptCBC::DataCryptCBC(QWidget *parent) : QWidget(parent)
     packageInputGroup->addButton(manualPackageRadio);
 
     filePackageLabel = new QTextEdit(this);
-    filePackageLabel->setStyleSheet("background-color: white;");
+    //filePackageLabel->setStyleSheet("background-color: white;");
     filePackageLabel->setVisible(false);
     filePackageLabel->setGeometry(10,305,600,80);
 
@@ -116,7 +116,7 @@ DataCryptCBC::DataCryptCBC(QWidget *parent) : QWidget(parent)
     label4 = new QLabel("Вывод зашифрованного блока",this);
     label4->setGeometry(10, 450, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 500, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

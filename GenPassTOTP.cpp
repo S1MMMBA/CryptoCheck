@@ -28,7 +28,7 @@ GenPassTOTP::GenPassTOTP(QWidget *parent) : QWidget(parent)
 //    label1->setGeometry(10, -5, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -65,8 +65,8 @@ GenPassTOTP::GenPassTOTP(QWidget *parent) : QWidget(parent)
 //    dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 130, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -77,7 +77,7 @@ GenPassTOTP::GenPassTOTP(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -106,7 +106,7 @@ GenPassTOTP::GenPassTOTP(QWidget *parent) : QWidget(parent)
     label4 = new QLabel("Одноразовый пароль:",this);
     label4->setGeometry(10, 350, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 400, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -126,42 +126,7 @@ GenPassTOTP::GenPassTOTP(QWidget *parent) : QWidget(parent)
 
 }
 
-//void GenPassTOTP::chooseDataFile()
-//{
 
-
-//    filePath = QFileDialog::getOpenFileName(this,
-//                                                "Выберите файл",
-//                                                QDir::homePath(),
-//                                                "Текстовые файлы (*.txt);;Бинарные файлы (*.bin)");
-//    dataString = new QString();
-//    if (!filePath.isEmpty())
-//    {
-//        QFile file(filePath);
-//        if (!file.open(QIODevice::ReadOnly))
-//        {
-//            QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл для чтения.");
-//            return;
-//        }
-
-//        byteDataArray = file.readAll();
-//        file.close();
-
-//        if(byteDataArray.isEmpty())
-//        {
-//            QMessageBox::warning(this, "Ошибка", "Файл пуст.");
-//            return;
-//        }
-//        fileDataLabel->setText(byteDataArray.toHex(' ').toUpper());
-//        QMessageBox::information(this, "Файл загружен", "Данные из файла успешно загружены.");
-//    }
-//    else
-//    {
-//        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
-//        return;
-//    }
-
-//}
 
 void GenPassTOTP::chooseKeyFile()
 {
@@ -316,7 +281,7 @@ void GenPassTOTP::produceMAC()
 //    {
 //        QFileInfo inputFileInfo(filePath);
 //        QString name = inputFileInfo.completeBaseName();
-//        QString outputFilePath = QFileInfo(inputFileInfo).absolutePath() +"/"+ name+ "_out_mac.bin";
+//        QString outputFilePath = QFileInfo(inputFileInfo).absolutePath() +"/"+ name+ "_out_pass.bin";
 //        QFile outputFile(outputFilePath);
 
 //        // Сохраняем в бинарном формате
@@ -324,10 +289,10 @@ void GenPassTOTP::produceMAC()
 //        {
 //            outputFile.write(reinterpret_cast<const char*>(result), d);
 //            outputFile.close();
-//            QMessageBox::information(this, "Имитовствака", "Имитовставка успешно сохранена в файл: " + outputFilePath);
+//            QMessageBox::information(this, "Имитовствака", "Пароль успешно сохранен в файл: " + outputFilePath);
 //        } else
 //        {
-//            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить имитовставку в файл!");
+//            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить пароль в файл!");
 //        }
 //    }
 }

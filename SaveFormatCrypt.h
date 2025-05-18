@@ -43,7 +43,8 @@ private:
     QLabel * label4;
     QLabel * label5;
     QLabel * label6;
-    QComboBox* numberCombo;
+    QSpinBox* numberCombo;
+
     QTextEdit * fileKeyLabel;
     QTextEdit * fileDataLabel;
     QTextEdit * filePackageLabel;

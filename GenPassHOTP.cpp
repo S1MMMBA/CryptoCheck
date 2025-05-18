@@ -14,11 +14,11 @@ GenPassHOTP::GenPassHOTP(QWidget *parent) : QWidget(parent)
     numberCombo->addItem(QString::number(8));
 
 
-    label1 = new QLabel("Укажите счетчик",this);
+    label1 = new QLabel("Укажите счетчик (С)",this);
     label1->setGeometry(10, -5, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -50,8 +50,8 @@ GenPassHOTP::GenPassHOTP(QWidget *parent) : QWidget(parent)
     dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 130, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -62,7 +62,7 @@ GenPassHOTP::GenPassHOTP(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -88,10 +88,10 @@ GenPassHOTP::GenPassHOTP(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Найти", this);
     encryptButton->setGeometry(500,260,100,30);
 
-    label4 = new QLabel("Вывод имитовставки",this);
+    label4 = new QLabel("Вывод пароля",this);
     label4->setGeometry(10, 350, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 400, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -139,7 +139,7 @@ void GenPassHOTP::chooseDataFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 
@@ -177,7 +177,7 @@ void GenPassHOTP::chooseKeyFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 }
@@ -314,7 +314,7 @@ void GenPassHOTP::produceMAC()
     {
         QFileInfo inputFileInfo(filePath);
         QString name = inputFileInfo.completeBaseName();
-        QString outputFilePath = QFileInfo(inputFileInfo).absolutePath() +"/"+ name+ "_out_mac.bin";
+        QString outputFilePath = QFileInfo(inputFileInfo).absolutePath() +"/"+ name+ "_out_pass.bin";
         QFile outputFile(outputFilePath);
 
         // Сохраняем в бинарном формате
@@ -325,7 +325,7 @@ void GenPassHOTP::produceMAC()
             QMessageBox::information(this, "Имитовствака", "Имитовставка успешно сохранена в файл: " + outputFilePath);
         } else
         {
-            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить имитовставку в файл!");
+            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить пароль в файл!");
         }
     }
 }

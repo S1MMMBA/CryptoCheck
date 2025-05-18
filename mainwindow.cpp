@@ -23,12 +23,18 @@
 #include"GenPassHOTP.h"
 #include"GenPassTOTP.h"
 #include"GenPassOCRA.h"
+
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent), settings("MyCompany", "MyApp")
 {
+    isDarkTheme = settings.value("darkTheme", false).toBool();
+
     setFixedSize(1000, 900);
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
+
+    createMenu();//+
+    createActions();//+
 
     mainLayout = new QHBoxLayout(centralWidget);
 
@@ -40,25 +46,25 @@ MainWindow::MainWindow(QWidget *parent)
     QTreeWidgetItem *standart_1 = new QTreeWidgetItem(treeWidget);
     standart_1->setText(0, "СТБ 34.101.31");
         QTreeWidgetItem *standart_1_1 = new QTreeWidgetItem(standart_1);
-        standart_1_1->setText(0, "шифрование блока");
+        standart_1_1->setText(0, "Шифрование блока");
         QTreeWidgetItem *standart_1_2 = new QTreeWidgetItem(standart_1);
-        standart_1_2->setText(0, "шифрование данных");
+        standart_1_2->setText(0, "Шифрование данных");
             QTreeWidgetItem *standart_1_2_1 = new QTreeWidgetItem(standart_1_2);
-            standart_1_2_1->setText(0, "простая замена(7.1)");
+            standart_1_2_1->setText(0, "Простая замена (7.1)");
             QTreeWidgetItem *standart_1_2_2 = new QTreeWidgetItem(standart_1_2);
-            standart_1_2_2->setText(0, "сцепление блоков(7.2)");
+            standart_1_2_2->setText(0, "Сцепление блоков (7.2)");
             QTreeWidgetItem *standart_1_2_3 = new QTreeWidgetItem(standart_1_2);
-            standart_1_2_3->setText(0, "гаммирование с обратной связью(7.3)");
+            standart_1_2_3->setText(0, "Гаммирование с обратной связью (7.3)");
             QTreeWidgetItem *standart_1_2_4 = new QTreeWidgetItem(standart_1_2);
-            standart_1_2_4->setText(0, "счетчик(7.4)");
+            standart_1_2_4->setText(0, "Счетчик (7.4)");
         QTreeWidgetItem *standart_1_3 = new QTreeWidgetItem(standart_1);
-        standart_1_3->setText(0, "выборка имитовставки");
+        standart_1_3->setText(0, "Выборка имитовставки");
         QTreeWidgetItem *standart_1_4 = new QTreeWidgetItem(standart_1);
-        standart_1_4->setText(0, "аутентифицированное шифрование данных");
+        standart_1_4->setText(0, "Аутентифицированное шифрование данных");
         QTreeWidgetItem *standart_1_5 = new QTreeWidgetItem(standart_1);
-        standart_1_5->setText(0, "шифрование и имитозащита ключа");
+        standart_1_5->setText(0, "Шифрование и имитозащита ключа");
         QTreeWidgetItem *standart_1_6 = new QTreeWidgetItem(standart_1);
-        standart_1_6->setText(0, "хэширование");
+        standart_1_6->setText(0, "Хэширование");
         QTreeWidgetItem *standart_1_7 = new QTreeWidgetItem(standart_1);
         standart_1_7->setText(0, "Блоковое дисковое шифрование");
         QTreeWidgetItem *standart_1_8 = new QTreeWidgetItem(standart_1);
@@ -69,29 +75,34 @@ MainWindow::MainWindow(QWidget *parent)
         standart_1_10->setText(0, "Расширение ключа");
         QTreeWidgetItem *standart_1_11 = new QTreeWidgetItem(standart_1);
         standart_1_11->setText(0, "Преобразование ключа");
+
+
+        QTreeWidgetItem *standart_3 = new QTreeWidgetItem(treeWidget);
+        standart_3->setText(0, "СТБ 34.101.47");
+        QTreeWidgetItem *standart_3_1 = new QTreeWidgetItem(standart_3);
+        standart_3_1->setText(0, "Выработка имитовставки (HMAC)");
+        QTreeWidgetItem *standart_3_2 = new QTreeWidgetItem(standart_3);
+        standart_3_2->setText(0, "Ген. псевдослуч. чисел (счетчик)");
+        QTreeWidgetItem *standart_3_3 = new QTreeWidgetItem(standart_3);
+        standart_3_3->setText(0, "Ген. псевдослуч. чисел (HMAC)");
+        QTreeWidgetItem *standart_3_4 = new QTreeWidgetItem(standart_3);
+        standart_3_4->setText(0, "Ген. одноразовых паролей (HOTP)");
+        QTreeWidgetItem *standart_3_5 = new QTreeWidgetItem(standart_3);
+        standart_3_5->setText(0, "Ген. одноразовых паролей (TOTP)");
+        QTreeWidgetItem *standart_3_6 = new QTreeWidgetItem(standart_3);
+        standart_3_6->setText(0, "Ген. одноразовых паролей (OCRA)");
+
+
     QTreeWidgetItem *standart_2 = new QTreeWidgetItem(treeWidget);
     standart_2->setText(0, "СТБ 34.101.77");
         QTreeWidgetItem *standart_2_1 = new QTreeWidgetItem(standart_2);
         standart_2_1->setText(0, "Хэширование");
         QTreeWidgetItem *standart_2_2 = new QTreeWidgetItem(standart_2);
-        standart_2_2->setText(0, "Хэширование(программируемые алгоритмы)");
+        standart_2_2->setText(0, "Хэширование (программируемые алгоритмы)");
         QTreeWidgetItem *standart_2_3 = new QTreeWidgetItem(standart_2);
         standart_2_3->setText(0, "Аутентифицированное шифрование");
 
-    QTreeWidgetItem *standart_3 = new QTreeWidgetItem(treeWidget);
-    standart_3->setText(0, "СТБ 34.101.47");
-    QTreeWidgetItem *standart_3_1 = new QTreeWidgetItem(standart_3);
-    standart_3_1->setText(0, "Выработка имитовставки(HMAC)");
-    QTreeWidgetItem *standart_3_2 = new QTreeWidgetItem(standart_3);
-    standart_3_2->setText(0, "Генерация псевдослучайных чисел(счетчик)");
-    QTreeWidgetItem *standart_3_3 = new QTreeWidgetItem(standart_3);
-    standart_3_3->setText(0, "Генерация псевдослучайных чисел(HMAC)");
-    QTreeWidgetItem *standart_3_4 = new QTreeWidgetItem(standart_3);
-    standart_3_4->setText(0, "Ген. одноразовых паролей(HOTP)");
-    QTreeWidgetItem *standart_3_5 = new QTreeWidgetItem(standart_3);
-    standart_3_5->setText(0, "Ген. одноразовых паролей(TOTP)");
-    QTreeWidgetItem *standart_3_6 = new QTreeWidgetItem(standart_3);
-    standart_3_6->setText(0, "Ген. одноразовых паролей(OCRA)");
+
 
 
 
@@ -220,6 +231,59 @@ MainWindow::MainWindow(QWidget *parent)
                     }
             });
 
+    applyTheme(isDarkTheme);
+}
+void MainWindow::createMenu()
+{
+    QMenuBar *menuBar = new QMenuBar(this);
+    QMenu *viewMenu = menuBar->addMenu("Вид");
+    themeAction = new QAction("Темная тема", this);
+    themeAction->setCheckable(true);
+    themeAction->setChecked(isDarkTheme);
+    viewMenu->addAction(themeAction);
+    setMenuBar(menuBar);
+}
+
+void MainWindow::createActions()
+{
+    connect(themeAction, &QAction::toggled, this, &MainWindow::toggleTheme);
+}
+
+void MainWindow::toggleTheme()
+{
+    isDarkTheme = !isDarkTheme;
+    settings.setValue("darkTheme", isDarkTheme);
+    applyTheme(isDarkTheme);
+}
+
+void MainWindow::applyTheme(bool darkTheme)
+{
+    QPalette palette;
+    if(darkTheme) {
+        // Настройка темной палитры
+        palette.setColor(QPalette::Window, QColor(53,53,53));
+        palette.setColor(QPalette::WindowText, Qt::white);
+        palette.setColor(QPalette::Base, QColor(35,35,35));
+        palette.setColor(QPalette::AlternateBase, QColor(53,53,53));
+        palette.setColor(QPalette::ToolTipBase, Qt::white);
+        palette.setColor(QPalette::ToolTipText, Qt::white);
+        palette.setColor(QPalette::Text, Qt::white);
+        palette.setColor(QPalette::Button, QColor(53,53,53));
+        palette.setColor(QPalette::ButtonText, Qt::white);
+        palette.setColor(QPalette::BrightText, Qt::red);
+        palette.setColor(QPalette::Highlight, QColor(142,45,197));
+        palette.setColor(QPalette::HighlightedText, Qt::black);
+
+        qApp->setStyle(QStyleFactory::create("Fusion"));
+    } else {
+        // Сброс к стандартной светлой теме
+        qApp->setStyle(QStyleFactory::create("Fusion"));
+        palette = qApp->style()->standardPalette();
+    }
+    qApp->setPalette(palette);
+
+    // Обновление стиля всех виджетов
+    qApp->style()->polish(qApp);
 }
 
 MainWindow::~MainWindow()

@@ -18,8 +18,8 @@ ExpandKey::ExpandKey(QWidget *parent) : QWidget(parent)
 
     numberCombo->setGeometry(330,10,70,30);
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 10, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 10, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -30,7 +30,7 @@ ExpandKey::ExpandKey(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,45,600,80);
 
@@ -55,10 +55,10 @@ ExpandKey::ExpandKey(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Расширить", this);
     encryptButton->setGeometry(500,160,100,30);
 
-    label4 = new QLabel("Расширенный ключ",this);
+    label4 = new QLabel("Расширенный ключ (K)",this);
     label4->setGeometry(10, 250, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 300, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

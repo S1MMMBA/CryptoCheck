@@ -5,11 +5,11 @@ ProduceMAC_HMAC_47::ProduceMAC_HMAC_47(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
 
-    label1 = new QLabel("Введите сообщение для выработки имитовставки",this);
+    label1 = new QLabel("Введите сообщение для выработки имитовставки (X)",this);
     label1->setGeometry(10, 10, 300, 30);
 
     fileDataLabel = new QTextEdit(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,80);
 
@@ -25,9 +25,9 @@ ProduceMAC_HMAC_47::ProduceMAC_HMAC_47(QWidget *parent) : QWidget(parent)
 
 
     dataTypeGroup = new QButtonGroup(this);
-    dataHexRadio = new QRadioButton("hex", this);
-    dataHexRadio->setGeometry(290,10,100,30);
-    dataHexRadio->setChecked(true);
+    //dataHexRadio = new QRadioButton("hex", this);
+    //dataHexRadio->setGeometry(290,10,100,30);
+    //dataHexRadio->setChecked(true);
     //dataStrRadio = new QRadioButton("text", this);
     //dataStrRadio->setGeometry(340,10,100,30);
 
@@ -41,8 +41,8 @@ ProduceMAC_HMAC_47::ProduceMAC_HMAC_47(QWidget *parent) : QWidget(parent)
     dataInputGroup->addButton(manualDataRadio);
 
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 130, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 130, 130, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -53,7 +53,7 @@ ProduceMAC_HMAC_47::ProduceMAC_HMAC_47(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,165,600,80);
 
@@ -79,10 +79,10 @@ ProduceMAC_HMAC_47::ProduceMAC_HMAC_47(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Найти", this);
     encryptButton->setGeometry(500,260,100,30);
 
-    label4 = new QLabel("Вывод имитовставки",this);
+    label4 = new QLabel("Вывод имитовставки (Y)",this);
     label4->setGeometry(10, 350, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 400, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     //OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -179,7 +179,7 @@ void ProduceMAC_HMAC_47::toggleDataInput()
     fileDataLabel->setVisible(isFileDataSelected);
     openFileDataButton->setVisible(isFileDataSelected);
     enterData->setVisible(!isFileDataSelected);
-    dataHexRadio->setVisible(!isFileDataSelected);
+    //dataHexRadio->setVisible(!isFileDataSelected);
     //dataStrRadio->setVisible(!isFileDataSelected);
 }
 void ProduceMAC_HMAC_47::toggleKeyInput()
@@ -235,8 +235,8 @@ void ProduceMAC_HMAC_47::produceMAC()
     {
          data = enterData->toPlainText();
         data = data.simplified().remove(' ');
-        if(dataHexRadio->isChecked())
-             {
+//        if(dataHexRadio->isChecked())
+//             {
                 if (!isHexFormat(data)){QMessageBox::warning(this, "Ошибка", "Введенные данные не являются корректными 16-ричными числами."); return;}
                 dataSizeBytes = data.size()/2;
                 block = new uint8_t[dataSizeBytes]();
@@ -246,16 +246,8 @@ void ProduceMAC_HMAC_47::produceMAC()
                     QMessageBox::warning(this, "Ошибка", "Не удалось преобразовать строку в массив байт.");
                     return;
                 }
-             }
-//        if(dataStrRadio->isChecked())
-//             {
-//                byteDataArray = data.toUtf8();
-//                dataSizeBytes = byteDataArray.size();
+ //            }
 
-//                block = new uint8_t[dataSizeBytes]();
-//                //result = new uint8_t[dataSizeBytes]();
-//                memcpy(block, byteDataArray.constData(),dataSizeBytes);
-//             }
     }
 
     if(fileDataRadio->isChecked())

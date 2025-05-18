@@ -17,7 +17,7 @@ InstallKeyMAC::InstallKeyMAC(QWidget *parent) : QWidget(parent)
     label1->setGeometry(10, 60, 300, 30);
 
     fileCriticalDataLabel = new QTextEdit(this);
-    fileCriticalDataLabel->setStyleSheet("background-color: white;");
+    //fileCriticalDataLabel->setStyleSheet("background-color: white;");
     fileCriticalDataLabel->setVisible(false);
     fileCriticalDataLabel->setGeometry(10,95,600,80);
 
@@ -63,7 +63,7 @@ InstallKeyMAC::InstallKeyMAC(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,340,600,80);
 
@@ -90,7 +90,7 @@ InstallKeyMAC::InstallKeyMAC(QWidget *parent) : QWidget(parent)
     titleInputGroup->addButton(manualTitleRadio);
 
     fileTitleLabel = new QTextEdit(this);
-    fileTitleLabel->setStyleSheet("background-color: white;");
+    //fileTitleLabel->setStyleSheet("background-color: white;");
     fileTitleLabel->setVisible(false);
     fileTitleLabel->setGeometry(10,220,600,80);
 
@@ -123,10 +123,10 @@ InstallKeyMAC::InstallKeyMAC(QWidget *parent) : QWidget(parent)
     encryptButton = new QPushButton("Найти", this);
     encryptButton->setGeometry(510,450,100,30);
 
-    label4 = new QLabel("Вывод зашифрованного блока",this);
+    label4 = new QLabel("Вывод блока",this);
     label4->setGeometry(10, 480, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 520, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

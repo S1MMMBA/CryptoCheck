@@ -8,7 +8,7 @@ Hash::Hash(QWidget *parent) : QWidget(parent)
     label1->setGeometry(10, 10, 300, 30);
 
     fileDataLabel = new QLabel(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,30);
 
@@ -45,7 +45,7 @@ Hash::Hash(QWidget *parent) : QWidget(parent)
         label4 = new QLabel("Вывод хэш-значения",this);
         label4->setGeometry(10, 250, 300, 30);
         OutPutLabel = new QLineEdit(this);
-        OutPutLabel->setStyleSheet("background-color: white;");
+       // OutPutLabel->setStyleSheet("background-color: white;");
         OutPutLabel->setGeometry(10, 300, 600, 30);
 
         connect(openFileDataButton, &QPushButton::clicked, this, &Hash::chooseDataFile);

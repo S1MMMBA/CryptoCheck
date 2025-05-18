@@ -6,9 +6,9 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
     chooseOperation = new QButtonGroup(this);
-    setProtectionRadio = new QRadioButton("установка защиты данных", this);
+    setProtectionRadio = new QRadioButton("Установка защиты данных", this);
     setProtectionRadio->setGeometry(10,20,175,30);
-    removeProtectionRadio = new QRadioButton("снятие защиты данных", this);
+    removeProtectionRadio = new QRadioButton("Снятие защиты данных", this);
     removeProtectionRadio->setGeometry(190,20,175,30);
     chooseOperation->addButton(setProtectionRadio);
     chooseOperation->addButton(removeProtectionRadio);
@@ -31,11 +31,11 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
                      numberCombo2->addItem(QString::number(1));
                      numberCombo2->addItem(QString::number(2));
 
-    label1 = new QLabel("Введите критическое сообщение",this);
+    label1 = new QLabel("Введите сообщение (X)",this);
     label1->setGeometry(10, 60, 300, 30);
 
     fileCriticalDataLabel = new QTextEdit(this);
-    fileCriticalDataLabel->setStyleSheet("background-color: white;");
+    //fileCriticalDataLabel->setStyleSheet("background-color: white;");
     fileCriticalDataLabel->setVisible(false);
     fileCriticalDataLabel->setGeometry(10,95,600,80);
 
@@ -67,11 +67,11 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     criticalDataInputGroup->addButton(manualCriticalDataRadio);
 //----------------------------------------------------------------------------------------
     // создание поля для ввода открытых данных
-    openDataLabel = new QLabel("Введите открытое сообщение",this);
+    openDataLabel = new QLabel("Введите ассоциированные данные (I)",this);
     openDataLabel->setGeometry(10, 185, 300, 30);
 
     fileOpenDataLabel = new QTextEdit(this);
-    fileOpenDataLabel->setStyleSheet("background-color: white;");
+    //fileOpenDataLabel->setStyleSheet("background-color: white;");
     fileOpenDataLabel->setVisible(false);
     fileOpenDataLabel->setGeometry(10,220,600,80);
 
@@ -104,8 +104,8 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     openDataInputGroup->addButton(manualOpenDataRadio);
 //---------------------------------------------------------------------------------------------
 
-    label2 = new QLabel("Введите ключ",this);
-    label2->setGeometry(10, 305, 90, 30);
+    label2 = new QLabel("Введите ключ (K)",this);
+    label2->setGeometry(10, 305, 120, 30);
 
     keyInputGroup = new QButtonGroup(this);
     fileKeyRadio = new QRadioButton("Из файла", this);
@@ -116,7 +116,7 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,340,600,80);
 
@@ -131,7 +131,7 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     keyInput->setWordWrapMode(QTextOption::WrapAnywhere);
     keyInput->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    label5 = new QLabel("Введите синхропосылку",this);
+    label5 = new QLabel("Введите анонс (A)",this);
     label5->setGeometry(10, 440, 140, 30);
 
     packageInputGroup = new QButtonGroup(this);
@@ -143,7 +143,7 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     packageInputGroup->addButton(manualPackageRadio);
 
     filePackageLabel = new QTextEdit(this);
-    filePackageLabel->setStyleSheet("background-color: white;");
+    //filePackageLabel->setStyleSheet("background-color: white;");
     filePackageLabel->setVisible(false);
     filePackageLabel->setGeometry(10,480,600,80);
 
@@ -152,14 +152,14 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     openFilePackageButton->setGeometry(620,450,90,30);
 
     packageInput = new QTextEdit(this);
-    packageInput->setPlaceholderText("Введите синхропосылку hex формате вручную");
+    packageInput->setPlaceholderText("Введите анонс в hex формате вручную");
     packageInput->setVisible(false);
     packageInput->setGeometry(10,480,600,80);
     packageInput->setWordWrapMode(QTextOption::WrapAnywhere);
     packageInput->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
 //-----------------------------------------------------------------------------------------
-    macLabel = new QLabel("Найденая имитовставка",this);
+    macLabel = new QLabel("Имитовставка (T):",this);
     macLabel->setGeometry(10, 560, 140, 30);
 
     macInputGroup = new QButtonGroup(this);
@@ -171,7 +171,7 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     macInputGroup->addButton(manualMacRadio);
 
     fileMacLabel = new QTextEdit(this);
-    fileMacLabel->setStyleSheet("background-color: white;");
+    //fileMacLabel->setStyleSheet("background-color: white;");
     fileMacLabel->setVisible(false);
     fileMacLabel->setGeometry(10,600,600,80);
 
@@ -180,7 +180,7 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     openFileMacButton->setGeometry(620,570,90,30);
 
     macInput = new QTextEdit(this);
-    macInput->setPlaceholderText("Найденая имитовставка");
+    macInput->setPlaceholderText("Имитовставка");
     macInput->setVisible(false);
     macInput->setGeometry(10,600,600,80);
     macInput->setWordWrapMode(QTextOption::WrapAnywhere);
@@ -208,15 +208,15 @@ AuthCrypt_34_101_77::AuthCrypt_34_101_77(QWidget *parent) : QWidget(parent)
     criticalDataHexRadio->setChecked(true);
 
     resetButton = new QPushButton("Сбросить", this);
-    resetButton->setGeometry(400,715,100,30);
+    resetButton->setGeometry(400,690,100,30);
     encryptButton = new QPushButton("Найти", this);
-    encryptButton->setGeometry(510,715,100,30);
+    encryptButton->setGeometry(510,690,100,30);
 
-    label4 = new QLabel("Вывод зашифрованного блока",this);
-    label4->setGeometry(10, 745, 300, 30);
+    label4 = new QLabel("Вывод блока",this);
+    label4->setGeometry(10, 720, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
-    OutPutLabel->setGeometry(10, 795, 600, 80);
+    //OutPutLabel->setStyleSheet("background-color: white;");
+    OutPutLabel->setGeometry(10, 750, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
@@ -279,7 +279,7 @@ void AuthCrypt_34_101_77::chooseCriticalDataFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 
@@ -317,7 +317,7 @@ void AuthCrypt_34_101_77::chooseOpenDataFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 
@@ -355,7 +355,7 @@ void AuthCrypt_34_101_77::chooseKeyFile()
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите данные и ключ для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные.");
         return;
     }
 }
@@ -388,11 +388,11 @@ void AuthCrypt_34_101_77::choosePackageFile()
             return;
         }
         filePackageLabel->setText(bytePackageArray.toHex(' ').toUpper());
-        QMessageBox::information(this, "Файл загружен", "Синхропосылка из файла успешно загружена.");
+        QMessageBox::information(this, "Файл загружен", "Анонс из файла успешно загружен.");
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите синхропосылку для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите анонс для шифрования.");
         return;
     }
 }
@@ -425,11 +425,11 @@ void AuthCrypt_34_101_77::chooseMacFile()
             return;
         }
         fileMacLabel->setText(byteMacArray.toHex(' ').toUpper());
-        QMessageBox::information(this, "Файл загружен", "Имитовствка из файла успешно загружена.");
+        QMessageBox::information(this, "Файл загружен", "Успешно загружено.");
     }
     else
     {
-        QMessageBox::warning(this, "Ошибка", "Введите имитовствку для шифрования.");
+        QMessageBox::warning(this, "Ошибка", "Введите данные для шифрования.");
         return;
     }
 }
@@ -766,10 +766,10 @@ void AuthCrypt_34_101_77::encryptData()
         {
             outputFile.write(reinterpret_cast<const char*>(criticalblock),criticalDataSizeBytes);
             outputFile.close();
-            QMessageBox::information(this, "Шифрование", "Расшифрованые данные успешно сохранены в файл: " + outputFilePath);
+            QMessageBox::information(this, "Шифрование", "Данные успешно сохранены в файл: " + outputFilePath);
         } else
         {
-            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить расшифрованые данные в файл!");
+            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить  данные в файл!");
         }
     }
 

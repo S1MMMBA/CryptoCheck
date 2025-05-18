@@ -4,10 +4,10 @@ Hash_34_101_77::Hash_34_101_77(QWidget *parent) : QWidget(parent)
 {
     layout = new QVBoxLayout(this);
 
-    label1 = new QLabel("Введите данные",this);
+    label1 = new QLabel("Введите данные (X)",this);
     label1->setGeometry(10, 10, 300, 30);
 
-    label6 = new QLabel("Укажите m",this);
+    label6 = new QLabel("Укажите l",this);
     label6->setGeometry(180,10,155,30);
     numberCombo = new QComboBox(this);
     numberCombo->setGeometry(330,10,70,30);
@@ -22,7 +22,7 @@ Hash_34_101_77::Hash_34_101_77(QWidget *parent) : QWidget(parent)
 
 
     fileDataLabel = new QLabel(this);
-    fileDataLabel->setStyleSheet("background-color: white;");
+    //fileDataLabel->setStyleSheet("background-color: white;");
     fileDataLabel->setVisible(false);
     fileDataLabel->setGeometry(10,45,600,30);
 
@@ -59,7 +59,7 @@ Hash_34_101_77::Hash_34_101_77(QWidget *parent) : QWidget(parent)
         label4 = new QLabel("Вывод хэш-значения",this);
         label4->setGeometry(10, 250, 300, 30);
         OutPutLabel = new QLineEdit(this);
-        OutPutLabel->setStyleSheet("background-color: white;");
+        //OutPutLabel->setStyleSheet("background-color: white;");
         OutPutLabel->setGeometry(10, 300, 600, 30);
 
         connect(openFileDataButton, &QPushButton::clicked, this, &Hash_34_101_77::chooseDataFile);
@@ -180,7 +180,7 @@ Hash_34_101_77::Hash_34_101_77(QWidget *parent) : QWidget(parent)
                     QMessageBox::information(this, "Шифрование", "Расшифрованые данные успешно сохранены в файл: " + outputFilePath);
                 } else
                 {
-                    QMessageBox::warning(this, "Ошибка", "Не удалось сохранить расшифрованые данные в файл!");
+                    QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные в файл!");
                 }
         }
 

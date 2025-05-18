@@ -16,7 +16,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     label1->setGeometry(10, 60, 300, 30);
 
     fileCriticalDataLabel = new QTextEdit(this);
-    fileCriticalDataLabel->setStyleSheet("background-color: white;");
+    //fileCriticalDataLabel->setStyleSheet("background-color: white;");
     fileCriticalDataLabel->setVisible(false);
     fileCriticalDataLabel->setGeometry(10,95,600,80);
 
@@ -52,7 +52,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     openDataLabel->setGeometry(10, 185, 300, 30);
 
     fileOpenDataLabel = new QTextEdit(this);
-    fileOpenDataLabel->setStyleSheet("background-color: white;");
+    //fileOpenDataLabel->setStyleSheet("background-color: white;");
     fileOpenDataLabel->setVisible(false);
     fileOpenDataLabel->setGeometry(10,220,600,80);
 
@@ -97,7 +97,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     keyInputGroup->addButton(manualKeyRadio);
 
     fileKeyLabel = new QTextEdit(this);
-    fileKeyLabel->setStyleSheet("background-color: white;");
+    //fileKeyLabel->setStyleSheet("background-color: white;");
     fileKeyLabel->setVisible(false);
     fileKeyLabel->setGeometry(10,340,600,80);
 
@@ -124,7 +124,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     packageInputGroup->addButton(manualPackageRadio);
 
     filePackageLabel = new QTextEdit(this);
-    filePackageLabel->setStyleSheet("background-color: white;");
+    //filePackageLabel->setStyleSheet("background-color: white;");
     filePackageLabel->setVisible(false);
     filePackageLabel->setGeometry(10,480,600,80);
 
@@ -152,7 +152,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     macInputGroup->addButton(manualMacRadio);
 
     fileMacLabel = new QTextEdit(this);
-    fileMacLabel->setStyleSheet("background-color: white;");
+    //fileMacLabel->setStyleSheet("background-color: white;");
     fileMacLabel->setVisible(false);
     fileMacLabel->setGeometry(10,600,600,80);
 
@@ -195,7 +195,7 @@ InstallMAC::InstallMAC(QWidget *parent) : QWidget(parent)
     label4 = new QLabel("Вывод зашифрованного блока",this);
     label4->setGeometry(10, 745, 300, 30);
     OutPutLabel = new QTextEdit(this);
-    OutPutLabel->setStyleSheet("background-color: white;");
+    //OutPutLabel->setStyleSheet("background-color: white;");
     OutPutLabel->setGeometry(10, 795, 600, 80);
     OutPutLabel->setWordWrapMode(QTextOption::WrapAnywhere);
     OutPutLabel->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);

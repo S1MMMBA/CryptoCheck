@@ -48,8 +48,8 @@ private:
     QRadioButton *manualDataRadio;
     QRadioButton *fileKeyRadio;
     QRadioButton *manualKeyRadio;
-    QRadioButton *dataStrRadio;
-    QRadioButton *dataHexRadio;
+    //QRadioButton *dataStrRadio;
+    //QRadioButton *dataHexRadio;
 
     QButtonGroup* dataInputGroup;
     QButtonGroup* keyInputGroup;

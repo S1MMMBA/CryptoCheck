@@ -25,12 +25,12 @@ class HashProg_34_101_77 : public QWidget {
 public:
     HashProg_34_101_77(QWidget *parent = nullptr);
 private slots:
-    void chooseKeyFile();      // Выбор ключа из файла
+    //void chooseKeyFile();      // Выбор ключа из файла
     void chooseCriticalDataFile();    // Выбор критичных данных из файла
 
     void chooseTitleFile();    // Выбор данных из файла
 
-    void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
+    //void toggleKeyInput();  // Переключение между файлами и вводом вручную ключа
     void toggleCriticalDataInput();  // Переключение между файлами и вводом вручную данных
     void toggleTitleInput();  // Переключение между файлами и вводом вручную синхропосылки
     void resetForm();       // Сброс формы
@@ -42,26 +42,28 @@ private:
     QLabel * label3;
     QLabel * label4;
     QLabel * label5;
-    QTextEdit * fileKeyLabel;
+    //QTextEdit * fileKeyLabel;
     QTextEdit * fileCriticalDataLabel;
     QTextEdit * fileTitleLabel;
     QTextEdit * OutPutLabel;
 
     QLabel * label6;
     QLabel * label7;
+    QLabel * label8;
     QComboBox* numberCombo;
     QComboBox* numberCombo2;
+    QSpinBox * spinBoxN;
 
     QTextEdit *enterCriticalData;
-    QTextEdit *keyInput;
+    //QTextEdit *keyInput;
     QTextEdit *titleInput;
 
     QRadioButton *setProtectionRadio;
     QRadioButton *removeProtectionRadio;
     QRadioButton *fileCriticalDataRadio;
     QRadioButton *manualCriticalDataRadio;
-    QRadioButton *fileKeyRadio;
-    QRadioButton *manualKeyRadio;
+    //QRadioButton *fileKeyRadio;
+    //QRadioButton *manualKeyRadio;
     QRadioButton *fileTitleRadio;
     QRadioButton *manualTitleRadio;
     QRadioButton *criticalDataStrRadio;
@@ -69,11 +71,11 @@ private:
 
     QButtonGroup* chooseOperation;
     QButtonGroup* criticalDataInputGroup;
-    QButtonGroup* keyInputGroup;
+    //QButtonGroup* keyInputGroup;
     QButtonGroup* criticalDataTypeGroup;
     QButtonGroup* titleInputGroup;
 
-    QPushButton * openFileKeyButton;
+    //QPushButton * openFileKeyButton;
     QPushButton * openFileCriticalDataButton;
     QPushButton * openFileTitleButton;
     QPushButton *resetButton;
@@ -81,7 +83,7 @@ private:
 
 
     QString *criticalDataString = new QString();
-    QString *keyString = new QString();
+    //QString *keyString = new QString();
     QString filePath;
 
     QByteArray byteCriticalDataArray;
@@ -90,4 +92,5 @@ private:
 
     size_t l;
     size_t d;
+    size_t n;
 };
